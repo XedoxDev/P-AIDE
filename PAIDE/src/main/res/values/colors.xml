@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#ffffff</color>
+    <color name="bgVariant">#E5FEFF</color>
+    <color name="primary">#17A1A4</color>
+    <color name="primaryVariant">#4EB7BB</color>
+    <color name="ripple">#50000000</color>
+    <color name="tint">#ffffff</color>
+    <color name="tintVariant">#303030</color>
+    <color name="toolbarTitle">#303030</color>
+    <color name="text">#303030</color>
+    <color name="hint">#505050</color>
+</resources>

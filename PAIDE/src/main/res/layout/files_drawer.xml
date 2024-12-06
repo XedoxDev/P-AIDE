@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <LinearLayout
+         android:layout_height="40dp"
+         android:layout_width="match_parent"
+         android:background="@color/primaryVariant"
+         android:id="@+id/panel">
+
+        <ImageButton
+             android:layout_height="40dp"
+             android:layout_width="40dp"
+             android:src="@drawable/folder"
+             style="@style/Widget.AppCompat.ActionButton"
+             android:id="@+id/mkdir" />
+
+        <ImageButton
+             android:layout_height="40dp"
+             android:layout_width="40dp"
+             android:src="@drawable/new_file"
+             style="@style/Widget.AppCompat.ActionButton"
+             android:id="@+id/mkfile" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:layout_below="@+id/panel"
+         android:id="@+id/files_list" />
+
+</LinearLayout>

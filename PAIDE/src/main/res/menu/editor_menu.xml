@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/save"
+        app:showAsAction="ifRoom"
+        android:title="@string/save" />
+    
+    <item
+        android:id="@+id/launch"
+        android:icon="@drawable/launch"
+        app:showAsAction="ifRoom"
+        android:title="@string/launch" />
+    
+    <item
+        android:id="@+id/build"
+        android:icon="@drawable/launch"
+        app:showAsAction="ifRoom"
+        android:title="@string/build" />
+    
+    <item
+        android:id="@+id/format_code"
+        android:icon="@drawable/format_code"
+        app:showAsAction="ifRoom"
+        android:title="@string/format_code" />
+</menu>

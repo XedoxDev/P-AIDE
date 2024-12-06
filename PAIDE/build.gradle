@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.xedox.paide'
+    compileSdk 33
+    
+    defaultConfig {
+        applicationId "com.xedox.paide"
+        minSdk 30
+        targetSdk 33
+        versionCode 1
+        versionName "@string/app_version"
+        
+        vectorDrawables { 
+            useSupportLibrary false
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding false
+    }
+}
+
+dependencies {
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    
+    implementation("io.github.Rosemoe.sora-editor:editor") 
+    implementation("io.github.Rosemoe.sora-editor:language-textmate")   
+    implementation(platform("io.github.Rosemoe.sora-editor:bom:0.23.4"))
+    
+    implementation("com.google.code.gson:gson:2.11.0")
+ 
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+}

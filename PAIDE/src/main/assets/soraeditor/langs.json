@@ -1,0 +1,16 @@
+{
+    "languages": [
+        {
+            "grammar": "soraeditor/processing/tmLanguage.json",
+            "name": "Processing",
+            "scopeName": "source.pde",
+            "languageConfiguration": "soraeditor/processing/language-configuration.json"
+        },
+        {
+            "grammar": "soraeditor/txt/tmLanguage.json",
+            "name": "Text",
+            "scopeName": "source.txt",
+            "languageConfiguration": "soraeditor/txt/language-configuration.json"
+        }
+    ]
+}

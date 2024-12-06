@@ -1,0 +1,68 @@
+[
+    {
+        "prefix": "for",
+        "body": "for(int i=0; i<count; i++) {\n}",
+        "description": "for loop",
+        "length": 2
+    },
+    {
+        "prefix": "foreach",
+        "body": "for(Object obj: arr) {\n}",
+        "description": "foreach loop",
+        "length": 2
+    },
+    {
+        "prefix": "class",
+        "body": "class MyClass {\n}",
+        "description": "java class",
+        "length": 2
+    },
+    {
+        "prefix": "pclass",
+        "body": "public class MyClass {\n}",
+        "description": "public java class",
+        "length": 3
+    },
+    {
+        "prefix": "function",
+        "body": "void myFunc() {\n}",
+        "description": "java function",
+        "length": 1
+    },
+    {
+        "prefix": "while",
+        "body": "while(true) {\n}",
+        "description": "while loop",
+        "length": 2
+    },
+    {
+        "prefix": "do while",
+        "body": "while {\n} do(true) {\n}",
+        "description": "do while loop",
+        "length": 2
+    },
+    {
+        "prefix": "comment",
+        "body": "// NOTE: your note",
+        "description": "comment",
+        "length": 1
+    },
+    {
+        "prefix": "comment block",
+        "body": "/*\n* NOTE: your mote\n*/",
+        "description": "comment block|",
+        "length": 1
+    },
+    {
+        "prefix": "enum",
+        "body": "enum MyEnum {\nENUM_ITEM\n}",
+        "description": "enum",
+        "length": 1
+    },
+    {
+        "prefix": "default",
+        "body": "void setup() {\n\tsize(400, 400);\n} \n\nvoid draw() {\n\tbackground(0);\n}",
+        "description": "default processing code",
+        "length": 1
+    },
+]

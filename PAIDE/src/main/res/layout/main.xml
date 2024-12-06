@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        android:id="@+id/appbar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            app:subtitleTextColor="@color/toolbarTitle"
+            android:background="@color/bg"
+            app:titleCentered="true"
+            app:titleTextColor="@color/toolbarTitle"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+            app:subtitleCentered="true"
+            android:id="@+id/toolbar"
+            app:subtitle="@string/app_version" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/appbar"
+        android:background="@drawable/round_bg"
+        android:layout_margin="16dp"
+        android:padding="7.5dp"
+        android:textSize="16sp"
+        android:textColor="@color/text"
+        android:id="@+id/appDescription"
+        android:text="@string/app_description" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/appDescription"
+        android:layout_marginEnd="16dp"
+        android:textSize="25sp"
+        android:textColor="@color/text"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/projectsMenu"
+        android:text="@string/projects"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/projectsMenu"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/projects" />
+
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/projectsMenu"
+        android:layout_marginEnd="16dp"
+        android:layout_above="@+id/newProjectButton"
+        android:textSize="25sp"
+        android:textColor="@color/text"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/empty_projects"
+        android:text="@string/projects_not_found" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_height="65dp"
+        android:layout_width="65dp"
+        app:maxImageSize="45dp"
+        app:rippleColor="@color/ripple"
+        app:backgroundTint="@color/primary"
+        android:layout_margin="16dp"
+        app:tint="@color/tint"
+        android:layout_alignParentEnd="true"
+        app:fabCustomSize="75dp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/plus"
+        android:id="@+id/newProjectButton" />
+
+</RelativeLayout>

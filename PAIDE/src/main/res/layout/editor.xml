@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical"
+     android:id="@+id/main_content">
+
+    <RelativeLayout
+         android:layout_height="40dp"
+         android:layout_width="match_parent"
+         android:background="@color/primaryVariant"
+         android:id="@+id/tabContainer">
+
+        <com.google.android.material.tabs.TabLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             app:tabMode="scrollable"
+             app:tabIndicatorColor="@color/bg"
+             android:layout_toLeftOf="@+id/undo"
+             app:tabIndicator="@drawable/tab_file"
+             app:tabTextColor="@color/hint"
+             app:tabSelectedTextColor="@color/text"
+             android:background="@color/primaryVariant"
+             app:tabGravity="start"
+             app:tabIndicatorHeight="35dp"
+             app:tabIndicatorFullWidth="false"
+             android:id="@+id/tabs" />
+
+        <ImageButton
+             android:layout_height="40dp"
+             android:layout_width="40dp"
+             android:src="@drawable/undo"
+             android:layout_toLeftOf="@+id/redo"
+             style="@style/Widget.AppCompat.ActionButton"
+             android:id="@+id/undo" />
+
+        <ImageButton
+             android:layout_height="40dp"
+             android:layout_width="40dp"
+             android:src="@drawable/redo"
+             style="@style/Widget.AppCompat.ActionButton"
+             android:layout_alignParentRight="true"
+             android:id="@+id/redo" />
+
+    </RelativeLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:layout_below="@+id/tabContainer"
+         android:layout_above="@+id/bottomBar"
+         android:nestedScrollingEnabled="false"
+         android:id="@+id/viewPager" />
+
+    <LinearLayout
+         android:layout_height="40dp"
+         android:layout_width="match_parent"
+         android:background="@color/primary"
+         android:gravity="center"
+         android:layout_alignParentBottom="true"
+         android:id="@+id/bottomBar">
+
+        <ImageButton
+             android:layout_height="40dp"
+             android:layout_width="40dp"
+             android:src="@drawable/console"
+             style="@style/Widget.AppCompat.ActionButton"
+             android:id="@+id/console" />
+
+    </LinearLayout>
+
+</RelativeLayout>

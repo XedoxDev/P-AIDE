@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">P-AIDE</string>
+    <string name="app_version">v0.0.1a</string>
+    <string name="app_description">P-AIDE - мобильная IDE для программирования на языке Processing. Собирай и запускай скетчи!</string>
+    
+    <string name="create_project">Создать проект</string>
+    <string name="projects_list">Список проектов</string>
+    <string name="projects">Меню проектов</string>
+    <string name="projects_not_found">Проекты не найдены</string>
+    <string name="project_name">Название проекта</string>
+    <string name="empty_project_name">Название проекта не может быть пустым!</string>
+    
+    <string name="save">Сохраниться</string>
+    <string name="launch">Запустить</string>
+    <string name="format_code">Форматировать код</string>
+    <string name="build">Сборка проекта</string>
+    
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+</resources>
