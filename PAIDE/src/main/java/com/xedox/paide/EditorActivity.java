@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -42,6 +43,8 @@ public class EditorActivity extends AppCompatActivity {
     public TabLayout tabLayout;
     public ViewPager2 viewPager;
 
+    public ProgressBar progress;
+
     public Project project;
 
     public DrawerLayout drawer;
@@ -63,6 +66,7 @@ public class EditorActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         filesList = findViewById(R.id.files_list);
         drawer = findViewById(R.id.drawer_layout);
+        progress = findViewById(R.id.progress);
 
         undo = findViewById(R.id.undo);
         redo = findViewById(R.id.redo);
@@ -173,7 +177,7 @@ public class EditorActivity extends AppCompatActivity {
             tabsAdapter.get(tabLayout.getSelectedTabPosition()).editor.formate();
         }
         if (item.getItemId() == R.id.build) {
-            Builder.build(cv, project);
+            Builder.build(this, cv, project, progress);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -186,13 +190,14 @@ public class EditorActivity extends AppCompatActivity {
                 v -> tabsAdapter.get(tabLayout.getSelectedTabPosition()).editor.undo());
         redo.setOnClickListener(
                 v -> tabsAdapter.get(tabLayout.getSelectedTabPosition()).editor.redo());
-        openConsole.setOnClickListener(
-                v -> {
-                    if (console == null) {
-                        console = new BottomSheetDialog(this);
-                        console.setContentView(cv);
-                    }
-                    console.show();
-                });
+        openConsole.setOnClickListener(v -> showConsole());
+    }
+
+    public void showConsole() {
+        if (console == null) {
+            console = new BottomSheetDialog(this);
+            console.setContentView(cv);
+        }
+        console.show();
     }
 }

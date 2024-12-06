@@ -7,7 +7,8 @@ public interface IFile {
     public static String TAG = "IFile";
     
     public String read();
-    public void write(String txt);
+    public boolean write(String txt);
+    public boolean write(byte[] txt);
     
     public boolean isFile();
     public boolean isDir();

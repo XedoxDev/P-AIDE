@@ -6,12 +6,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 import com.xedox.paide.utils.io.Assets;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SnippetsReader {
-    public static Snippet[] read(Context c, String langName) {
+    public static Snippet[] read(Context c, String langName) throws IOException {
         String json =
                 Assets.from(c)
                         .asset(String.format("soraeditor/%s/snippets.json", langName))

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.xedox.paide.utils.Project;
 import com.xedox.paide.utils.TaskExecutor;
+import com.xedox.paide.utils.io.Assets;
 import com.xedox.paide.utils.io.FileX;
 import com.xedox.paide.utils.io.IFile;
 
@@ -23,6 +24,7 @@ import io.github.rosemoe.sora.langs.textmate.registry.provider.AssetsFileResolve
 
 import java.io.File;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,6 @@ public class PAIDE extends Application {
     public static final byte MANAGE_REQUEST_CODE = 1;
     public static IFile projects;
     public static IFile externalStorage = new FileX(Environment.getExternalStorageDirectory());
-
-    static {
-    }
 
     @Override
     public void onCreate() {
@@ -68,7 +67,7 @@ public class PAIDE extends Application {
     public static void debug(String text) {
         debug(paide, text);
     }
-    
+
     public static void debug(Context c, String text) {
         // off for release apk
         Toast.makeText(c, text, Toast.LENGTH_LONG).show();
@@ -88,30 +87,64 @@ public class PAIDE extends Application {
     }
 
     public static void initSchemes(Context c) {
-        /*TaskExecutor.execute(
-        () -> {*/
-        try {
-            FileProviderRegistry.getInstance()
-                    .addFileProvider(
-                            new AssetsFileResolver(c.getApplicationContext().getAssets()));
-            var themeRegistry = ThemeRegistry.getInstance();
-            String name = "darcula";
-            String themeAssetsPath = "soraeditor/themes/" + name + ".json";
-            ThemeModel model =
-                    new ThemeModel(
-                            IThemeSource.fromInputStream(
-                                    FileProviderRegistry.getInstance()
-                                            .tryGetInputStream(themeAssetsPath),
-                                    themeAssetsPath,
-                                    null),
-                            name);
-            themeRegistry.loadTheme(model);
-            ThemeRegistry.getInstance().setTheme("Darcula");
-            GrammarRegistry.getInstance().loadGrammars("soraeditor/langs.json");
-        } catch (Exception e) {
-            e.printStackTrace();
-            debug(c, e.toString());
-        }
-        // });
+        TaskExecutor.execute(
+                () -> {
+                    try {
+                        FileProviderRegistry.getInstance()
+                                .addFileProvider(
+                                        new AssetsFileResolver(
+                                                c.getApplicationContext().getAssets()));
+                        var themeRegistry = ThemeRegistry.getInstance();
+                        String name = "darcula";
+                        String themeAssetsPath = "soraeditor/themes/" + name + ".json";
+                        ThemeModel model =
+                                new ThemeModel(
+                                        IThemeSource.fromInputStream(
+                                                FileProviderRegistry.getInstance()
+                                                        .tryGetInputStream(themeAssetsPath),
+                                                themeAssetsPath,
+                                                null),
+                                        name);
+                        themeRegistry.loadTheme(model);
+                        ThemeRegistry.getInstance().setTheme("Darcula");
+                        GrammarRegistry.getInstance().loadGrammars("soraeditor/langs.json");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        debug(c, e.toString());
+                    }
+                });
+    }
+
+    public static void copyProcessingCoreJar(Activity act) {
+        TaskExecutor.execute(
+                () -> {
+                    try {
+                        IFile pcj = new FileX(projects.parent(), "processing-core.jar");
+                        if (!pcj.exists()) {
+                            Assets.from(paide)
+                                    .asset(pcj.getName())
+                                    .toPath(pcj.parent().getFullPath())
+                                    .copyBinary();
+                        }
+                        act.runOnUiThread(
+                                () -> {
+                                    Toast.makeText(
+                                                    act,
+                                                    R.string.processing_core_copyed_successful,
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
+                                });
+                    } catch (Exception err) {
+                        err.printStackTrace();
+                        act.runOnUiThread(
+                                () -> {
+                                    Toast.makeText(
+                                                    act,
+                                                    R.string.processing_core_copyed_unsuccessful,
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
+                                });
+                    }
+                });
     }
 }

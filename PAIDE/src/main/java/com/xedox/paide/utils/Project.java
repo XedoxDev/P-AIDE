@@ -27,10 +27,14 @@ public class Project {
             src.mkdir();
             IFile main = new FileX(src, "main.pde");
             main.mkfile();
-            main.write(Assets.from(paide).asset("default_code.pde").read());
+            try {
+                main.write(Assets.from(paide).asset("default_code.pde").read());
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     public void delete() {
         dir.removeDir();
     }

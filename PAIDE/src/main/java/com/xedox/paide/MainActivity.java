@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
         
         initSchemes(this);
+        copyProcessingCoreJar(this);
         
         toolbar = findViewById(R.id.toolbar);
         projects = findViewById(R.id.projects);

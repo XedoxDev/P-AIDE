@@ -7,29 +7,35 @@ import android.widget.EditText;
 import com.xedox.paide.R;
 
 public class ConsoleView extends EditText {
-    public ConsoleView(Context c){
+    public ConsoleView(Context c) {
         super(c);
         init();
     }
-    
-    public ConsoleView(Context c, AttributeSet attrs){
+
+    public ConsoleView(Context c, AttributeSet attrs) {
         super(c, attrs);
         init();
     }
-    
+
     public void init() {
-        setTextSize(24);
+        setTextSize(17); 
         setGravity(Gravity.START);
         setTextColor(getContext().getColor(R.color.text));
         setPadding(7, 7, 7, 7);
-        setClickable(false);
+        setBackgroundColor(0x00000000);
+        setActivated(false);
+        setHorizontalScrollBarEnabled(true);
+        setFocusable(false);
+        setFocusableInTouchMode(false);
+        setTextIsSelectable(true); 
+        setHeight(400);
     }
-    
-    public void print(String txt) {
-        setText(getText() + txt);
+
+    public synchronized void print(String txt) {
+        append(txt);
     }
-    
-    public void println(String txt) {
-        setText(getText() + txt + "\n");
+
+    public synchronized void println(String txt) {
+        append(txt + "\n");
     }
 }
