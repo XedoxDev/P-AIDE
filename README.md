@@ -1,10 +1,10 @@
 # P-AIDE
 
-P-AIDE - Processing Android Integrated Delelopoment Enviroment
-You can progamming on Processing Programmng language on your phhones!
-Build and launch your skethces!
+P-AIDE — Processing Android Integrated Development Environment
+You can program in the Processing programming language on your phone!
+Build and launch your sketches!
 
-In editor using [SoraEdior](https://github.com/resomoe/SoraEditor), its cool and smoothed editor for android, with optimized hightlighing syntax, snippets and auto-complete code.
+In the editor using [SoraEdior](https://github.com/resomoe/SoraEditor), it's a cool and smooth editor for Android, with optimized syntax highlighting, snippets, and code auto-completion.
 
 > **App name**: _Processing AIDE_
 > 
