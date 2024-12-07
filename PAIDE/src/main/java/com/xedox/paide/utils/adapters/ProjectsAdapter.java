@@ -53,7 +53,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.VH> {
     }
 
     private void showContextMenu(View v, Project project, int pos) {
-        new ContextMenu(
+        new ContextMenu(v.getContext(),
                 v,
                 R.menu.project,
                 i -> {

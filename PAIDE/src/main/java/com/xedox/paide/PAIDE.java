@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.Settings;
@@ -24,8 +23,6 @@ import io.github.rosemoe.sora.langs.textmate.registry.provider.AssetsFileResolve
 
 import java.io.File;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,17 +30,24 @@ import org.eclipse.tm4e.core.registry.IThemeSource;
 
 public class PAIDE extends Application {
 
-    public static PAIDE paide;
+    public static PAIDE APP;
+
     public static final byte MANAGE_REQUEST_CODE = 1;
-    public static IFile projects;
-    public static IFile externalStorage = new FileX(Environment.getExternalStorageDirectory());
+    public static final String APP_FOLDER_NAME = "P-AIDE/";
+    public static final IFile EXTERNAL_STORAGE =
+            new FileX(Environment.getExternalStorageDirectory());
+    public static final String PROJECTS_FOLDER_NAME = "projects/";
+    public static final IFile PROJECTS_FOLDER =
+            new FileX(EXTERNAL_STORAGE, APP_FOLDER_NAME + PROJECTS_FOLDER_NAME);
+    public static final IFile APP_FOLDER = new FileX(EXTERNAL_STORAGE, PROJECTS_FOLDER_NAME);
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        paide = this;
-        projects = new FileX(externalStorage, "P-AIDE/projects");
-        if (!projects.exists()) projects.mkdirs();
+        APP = this;
+        Project.context = APP;
+        if (!PROJECTS_FOLDER.exists()) PROJECTS_FOLDER.mkdirs();
     }
 
     public static boolean requestManagePremission(Activity activity) {
@@ -52,7 +56,7 @@ public class PAIDE extends Application {
             try {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse("package:" + paide.getPackageName()));
+                intent.setData(Uri.parse("package:" + APP.getPackageName()));
                 activity.startActivityForResult(intent, MANAGE_REQUEST_CODE);
             } catch (Exception e) {
                 Intent intent = new Intent();
@@ -65,7 +69,7 @@ public class PAIDE extends Application {
     }
 
     public static void debug(String text) {
-        debug(paide, text);
+        debug(APP, text);
     }
 
     public static void debug(Context c, String text) {
@@ -76,7 +80,7 @@ public class PAIDE extends Application {
     public static List<Project> getProjects(Activity activity) {
         List<Project> projects = new ArrayList<>();
         if (requestManagePremission(activity)) {
-            File[] files = PAIDE.projects.files();
+            File[] files = PROJECTS_FOLDER.files();
             for (File file : files) {
                 if (file.isDirectory()) {
                     projects.add(new Project(file.getName()));
@@ -94,7 +98,7 @@ public class PAIDE extends Application {
                                 .addFileProvider(
                                         new AssetsFileResolver(
                                                 c.getApplicationContext().getAssets()));
-                        var themeRegistry = ThemeRegistry.getInstance();
+                        ThemeRegistry themeRegistry = ThemeRegistry.getInstance();
                         String name = "darcula";
                         String themeAssetsPath = "soraeditor/themes/" + name + ".json";
                         ThemeModel model =
@@ -116,35 +120,38 @@ public class PAIDE extends Application {
     }
 
     public static void copyProcessingCoreJar(Activity act) {
-        TaskExecutor.execute(
-                () -> {
-                    try {
-                        IFile pcj = new FileX(projects.parent(), "processing-core.jar");
-                        if (!pcj.exists()) {
-                            Assets.from(paide)
+        IFile pcj = new FileX(PROJECTS_FOLDER.parent(), "processing-core.jar");
+        if (!pcj.exists()) {
+            TaskExecutor.execute(
+                    () -> {
+                        try {
+
+                            Assets.from(APP)
                                     .asset(pcj.getName())
                                     .toPath(pcj.parent().getFullPath())
                                     .copyBinary();
+
+                            act.runOnUiThread(
+                                    () -> {
+                                        Toast.makeText(
+                                                        act,
+                                                        R.string.processing_core_copyed_successful,
+                                                        Toast.LENGTH_SHORT)
+                                                .show();
+                                    });
+                        } catch (Exception err) {
+                            err.printStackTrace();
+                            act.runOnUiThread(
+                                    () -> {
+                                        Toast.makeText(
+                                                        act,
+                                                        R.string
+                                                                .processing_core_copyed_unsuccessful,
+                                                        Toast.LENGTH_SHORT)
+                                                .show();
+                                    });
                         }
-                        act.runOnUiThread(
-                                () -> {
-                                    Toast.makeText(
-                                                    act,
-                                                    R.string.processing_core_copyed_successful,
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                });
-                    } catch (Exception err) {
-                        err.printStackTrace();
-                        act.runOnUiThread(
-                                () -> {
-                                    Toast.makeText(
-                                                    act,
-                                                    R.string.processing_core_copyed_unsuccessful,
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                });
-                    }
-                });
+                    });
+        }
     }
 }

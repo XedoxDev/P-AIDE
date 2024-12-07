@@ -17,8 +17,6 @@ import com.xedox.paide.utils.Project;
 
 import java.util.List;
 
-import static com.xedox.paide.PAIDE.*;
-
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -32,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        initSchemes(this);
-        copyProcessingCoreJar(this);
+        PAIDE.initSchemes(this);
+        PAIDE.copyProcessingCoreJar(this);
         
         toolbar = findViewById(R.id.toolbar);
         projects = findViewById(R.id.projects);
@@ -58,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     } catch (Exception err) {
                         err.printStackTrace();
-                        debug(err.toString());
+                        PAIDE.debug(err.toString());
                     }
                 };
         projects.setAdapter(projectsAdapter);
         
-        List<Project> projectList = getProjects(this);
+        List<Project> projectList = PAIDE.getProjects(this);
         projectsAdapter.setProjects(projectList);
 
         newProjectFAB.setOnClickListener(v -> CreateProjectDialog.show(this, projectsAdapter));

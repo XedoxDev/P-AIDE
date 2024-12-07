@@ -1,20 +1,19 @@
 package com.xedox.paide.utils.editor;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import static com.xedox.paide.PAIDE.*;
+
 import com.xedox.paide.utils.editor.soraEditor.SoraEditor;
 import com.xedox.paide.utils.editor.soraEditor.TML;
 import com.xedox.paide.utils.io.IFile;
-
-import io.github.rosemoe.sora.langs.textmate.registry.ThemeRegistry;
-import java.io.IOException;
 
 import static android.view.ViewGroup.LayoutParams;
 
@@ -37,17 +36,17 @@ public class EditorFragment extends Fragment {
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        if (container == null) container = new RelativeLayout(paide);
+        if (container == null) container = new RelativeLayout(container.getContext());
         if (type == Editor.SORA_EDITOR) {
-            editor = createSoraEditor();
+            editor = createSoraEditor(container.getContext());
         }
         if (editor != null) container.addView(editor.getView(), layoutParams);
         editor.setCode(file.read());
         return container;
     }
 
-    public SoraEditor createSoraEditor() {
-        SoraEditor editor = new SoraEditor(paide);
+    public SoraEditor createSoraEditor(Context context) {
+        SoraEditor editor = new SoraEditor(context);
         String lang = "processing";
         String extension = ".pde";
         if (file.getName().endsWith(".pde")) {
@@ -57,7 +56,7 @@ public class EditorFragment extends Fragment {
             extension = ".txt";
             lang = "Text";
         }
-        TML tml = new TML("scope" + extension, lang);
+        TML tml = new TML(context, "scope" + extension, lang);
         editor.setEditorLanguage(tml);
         return editor;
     }

@@ -17,4 +17,6 @@ In the editor using [SoraEdior](https://github.com/resomoe/SoraEditor), it's a c
 # Thanks <3
 > [**APDE**](https://github.com/Calsign/APDE.git) - thanks for idea, code and more <3
 
-> [**🐳**](https://t.me/BlueWhaleYT) - thanks for help to sora editor settinging <3
+> [**🐳**](https://t.me/BlueWhaleYT) - thanks for help to sora editor settinging ;>
+
+> [**Resomoe**](https://github.com/resomoe/SoraEditor) - thanks for sora editor :3

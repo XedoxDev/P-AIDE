@@ -1,9 +1,9 @@
 package com.xedox.paide.utils;
 
+import android.content.Context;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import static com.xedox.paide.PAIDE.*;
 import androidx.appcompat.widget.PopupMenu;
 
 public class ContextMenu {
@@ -12,9 +12,9 @@ public class ContextMenu {
     public MenuInflater inflater;
     public OnItemClickListener oicl;
 
-    public ContextMenu(View view, int menuId, OnItemClickListener oicl) {
-        this.inflater = new MenuInflater(paide);
-        menu = new PopupMenu(paide, view);
+    public ContextMenu(Context context, View view, int menuId, OnItemClickListener oicl) {
+        this.inflater = new MenuInflater(context);
+        menu = new PopupMenu(context, view);
         this.oicl = oicl;
         menu.setOnMenuItemClickListener(
                 new PopupMenu.OnMenuItemClickListener() {

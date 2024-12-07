@@ -1,12 +1,14 @@
 package com.xedox.paide.utils;
 
+import android.content.Context;
+import com.xedox.paide.PAIDE;
 import com.xedox.paide.utils.io.Assets;
 import com.xedox.paide.utils.io.FileX;
 import com.xedox.paide.utils.io.IFile;
 
-import static com.xedox.paide.PAIDE.*;
-
 public class Project {
+    
+    public static Context context;
 
     public String name;
 
@@ -16,7 +18,7 @@ public class Project {
 
     public Project(String name) {
         this.name = name;
-        dir = new FileX(projects, name);
+        dir = new FileX(PAIDE.PROJECTS_FOLDER, name);
         src = new FileX(dir, "src");
         build = new FileX(dir, "build");
     }
@@ -28,7 +30,7 @@ public class Project {
             IFile main = new FileX(src, "main.pde");
             main.mkfile();
             try {
-                main.write(Assets.from(paide).asset("default_code.pde").read());
+                main.write(Assets.from(context).asset("default_code.pde").read());
             } catch (Throwable e) {
                 e.printStackTrace();
             }

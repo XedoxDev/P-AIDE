@@ -1,5 +1,6 @@
 package com.xedox.paide.utils.editor.soraEditor;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,15 +17,15 @@ import io.github.rosemoe.sora.text.CharPosition;
 import io.github.rosemoe.sora.text.ContentReference;
 import io.github.rosemoe.sora.util.MyCharacter;
 
-import static com.xedox.paide.PAIDE.*;
 import java.io.IOException;
 
 public class TML extends TextMateLanguage {
 
     public String scope;
     public String lang;
+    public Context context;
 
-    public TML(String scopeName, String lang) {
+    public TML(Context context, String scopeName, String lang) {
         super(
                 GrammarRegistry.getInstance().findGrammar(scopeName),
                 GrammarRegistry.getInstance().findLanguageConfiguration(scopeName),
@@ -42,7 +43,7 @@ public class TML extends TextMateLanguage {
             Bundle extraArguments) {
         super.requireAutoComplete(content, position, publisher, extraArguments);
         try {
-            for (SnippetsReader.Snippet s : SnippetsReader.read(paide, "processing")) {
+            for (SnippetsReader.Snippet s : SnippetsReader.read(context, lang)) {
                 publisher.addItem(
                         new SimpleCompletionItem(s.prefix, s.description, s.length, s.body));
             }

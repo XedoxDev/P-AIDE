@@ -16,7 +16,7 @@ public class ProcessingUtils {
     }
     
     public static String toJavaCode(String processingCode) throws IOException {
-        String sample = Assets.from(PAIDE.paide).asset("Sketch.java").read();
+        String sample = Assets.from(PAIDE.APP).asset("Sketch.java").read();
         return String.format(sample, processingCode);
     }
     

@@ -22,7 +22,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import com.xedox.paide.utils.Project;
-import static com.xedox.paide.PAIDE.*;
 import com.xedox.paide.utils.ConsoleView;
 import com.xedox.paide.utils.adapters.FilesAdapter;
 import com.xedox.paide.utils.adapters.TabsAdapter;

@@ -1,13 +1,21 @@
 package com.xedox.paide.utils.compiler;
 
 import com.android.tools.r8.D8;
+
 import com.sun.tools.javac.Main;
 import com.xedox.paide.PAIDE;
 import com.xedox.paide.utils.Project;
 import com.xedox.paide.utils.io.FileX;
 import com.xedox.paide.utils.io.IFile;
 
-public class Compiler {
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
+public class PCompiler {
     public static void compileProject(Project project) throws Throwable {
         IFile[] files = project.src.ifiles();
         String javaCode = ProcessingUtils.bindToJava(files);
@@ -17,9 +25,9 @@ public class Compiler {
             throw new RuntimeException("Could not create or write file Sketch.java");
         }
 
-        IFile processing_core_jar = new FileX(PAIDE.projects.parent(), "processing-core.jar");
-        if (!processing_core_jar.exists()) {
-            throw new Exception("processing-core.jar not found!");
+        IFile processingCoreJar = new FileX(PAIDE.APP_FOLDER, "processing-core.jar");
+        if (!processingCoreJar.exists()) {
+            throw new RuntimeException("processing-core.jar not found!");
         }
 
         String[] javacArgs = {
@@ -28,7 +36,7 @@ public class Compiler {
             "-d",
             project.build.getFullPath(),
             "-classpath",
-            processing_core_jar.getFullPath(),
+            processingCoreJar.getFullPath(),
             sketchJava.getFullPath()
         };
 

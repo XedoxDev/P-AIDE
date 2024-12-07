@@ -24,7 +24,7 @@ public class PreviewActivity extends AppCompatActivity {
             sketch =
                     DexLoader.loadClass(
                             "Sketch",
-                            new FileX(project.build, "Skethc.dex").getFullPath(),
+                            new FileX(project.build, "Sketch.dex").getFullPath(),
                             "",
                             this);
         } catch (Exception e) {
