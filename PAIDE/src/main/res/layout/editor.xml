@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:visibility="gone"
         android:id="@+id/progress"
-        android:background="@color/primary"
-        android:foreground="@color/primaryVariant" />
+        android:progressDrawable="@drawable/progress_indicator" />
 
     <RelativeLayout
         android:layout_height="40dp"

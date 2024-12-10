@@ -4,12 +4,6 @@
 	"scopeName": "source.pde",
 	"patterns": [
 		{
-            "begin": "\\btouches\\b",
-			"beginCaptures": {
-				"1": {
-					"name": "processing.keywords"
-				}
-			},
 			"begin": "\\b(package)\\b\\s*",
 			"beginCaptures": {
 				"1": {

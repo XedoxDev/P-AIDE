@@ -22,7 +22,7 @@ public interface IFile {
     public String getFullPath();
     public IFile getFullFile();
     
-    public File getFileObject();
+    public File toFile();
     
     public void remove();
     public void removeDir();

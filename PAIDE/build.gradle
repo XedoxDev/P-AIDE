@@ -26,8 +26,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -41,12 +41,7 @@ dependencies {
     
     implementation("io.github.Rosemoe.sora-editor:editor") 
     implementation("io.github.Rosemoe.sora-editor:language-textmate")   
-    implementation(platform("io.github.Rosemoe.sora-editor:bom:0.23.4"))
+    implementation(platform("io.github.Rosemoe.sora-editor:bom:0.23.5"))
     
-    implementation("com.google.code.gson:gson:2.11.0")
-    implementation("com.github.marschall:zipfilesystem-standalone:1.0.1")
-    
-    implementation files("libs/d8.jar")
-    implementation files("libs/nb-javac-17.0.0.0-android.jar")
-    implementation files("libs/processing-core.jar")
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

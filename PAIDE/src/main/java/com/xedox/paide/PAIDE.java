@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.xedox.paide.utils.Project;
 import com.xedox.paide.utils.TaskExecutor;
+import com.xedox.paide.utils.formatter.Formatter;
+import com.xedox.paide.utils.formatter.EclipseFormat;
 import com.xedox.paide.utils.io.Assets;
 import com.xedox.paide.utils.io.FileX;
 import com.xedox.paide.utils.io.IFile;
@@ -33,21 +35,25 @@ public class PAIDE extends Application {
     public static PAIDE APP;
 
     public static final byte MANAGE_REQUEST_CODE = 1;
+    
     public static final String APP_FOLDER_NAME = "P-AIDE/";
-    public static final IFile EXTERNAL_STORAGE =
-            new FileX(Environment.getExternalStorageDirectory());
     public static final String PROJECTS_FOLDER_NAME = "projects/";
-    public static final IFile PROJECTS_FOLDER =
-            new FileX(EXTERNAL_STORAGE, APP_FOLDER_NAME + PROJECTS_FOLDER_NAME);
-    public static final IFile APP_FOLDER = new FileX(EXTERNAL_STORAGE, PROJECTS_FOLDER_NAME);
-
-
+    public static final String DATA_FOLDER_NAME = "data/data/com.xedox.paide.files/";
+    
+    public static final IFile EXTERNAL_STORAGE = new FileX(Environment.getExternalStorageDirectory());
+    public static final IFile PROJECTS_FOLDER = new FileX(EXTERNAL_STORAGE, APP_FOLDER_NAME + PROJECTS_FOLDER_NAME);
+    public static final IFile APP_FOLDER = new FileX(EXTERNAL_STORAGE, APP_FOLDER_NAME);
+    
+    public static Formatter formatter;
+     
     @Override
     public void onCreate() {
         super.onCreate();
         APP = this;
         Project.context = APP;
+        if (!APP_FOLDER.exists()) APP_FOLDER.mkdirs();
         if (!PROJECTS_FOLDER.exists()) PROJECTS_FOLDER.mkdirs();
+        formatter = new EclipseFormat();
     }
 
     public static boolean requestManagePremission(Activity activity) {

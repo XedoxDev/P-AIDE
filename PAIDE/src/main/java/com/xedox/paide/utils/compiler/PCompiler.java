@@ -2,18 +2,14 @@ package com.xedox.paide.utils.compiler;
 
 import com.android.tools.r8.D8;
 
-import com.sun.tools.javac.Main;
 import com.xedox.paide.PAIDE;
 import com.xedox.paide.utils.Project;
 import com.xedox.paide.utils.io.FileX;
 import com.xedox.paide.utils.io.IFile;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.io.PrintWriter;
+import org.eclipse.jdt.core.compiler.CompilationProgress;
+import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 
 public class PCompiler {
     public static void compileProject(Project project) throws Throwable {
@@ -30,20 +26,28 @@ public class PCompiler {
             throw new RuntimeException("processing-core.jar not found!");
         }
 
-        String[] javacArgs = {
-            "-sourcepath",
-            project.src.getFullPath(),
+        IFile debug = new FileX(project.build, "output.txt");
+        debug.mkfile();
+
+        String classpath = processingCoreJar.getFullPath();
+        String outputDir = project.build.getFullPath();
+
+        String[] commandLineArgs = {
+            "-source",
+            "8",
+            "-target",
+            "8",
             "-d",
-            project.build.getFullPath(),
-            "-classpath",
-            processingCoreJar.getFullPath(),
+            outputDir,
+            "-cp",
+            classpath,
             sketchJava.getFullPath()
         };
 
-        try {
-            Main.main(javacArgs);
-        } catch (Exception e) {
-            throw new RuntimeException("Compilation exception: " + e.getMessage(), e);
+        PrintWriter pw = new PrintWriter(debug.toFile());
+        boolean result = BatchCompiler.compile(commandLineArgs, pw, pw, null);
+        if (!result) {
+            throw new RuntimeException("Failed compile Sketch.java");
         }
     }
 

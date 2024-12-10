@@ -33,6 +33,7 @@ public class TML extends TextMateLanguage {
                 ThemeRegistry.getInstance(),
                 true);
         scope = scopeName;
+        this.context = context;
     }
 
     @Override

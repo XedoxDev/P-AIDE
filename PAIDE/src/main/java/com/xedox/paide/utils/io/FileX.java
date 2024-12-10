@@ -27,7 +27,7 @@ public class FileX extends File implements IFile {
     }
 
     public FileX(IFile ifile, String name) {
-        super(ifile.getFileObject(), name);
+        super(ifile.toFile(), name);
     }
 
     public FileX(IFile ifile) {
@@ -95,7 +95,7 @@ public class FileX extends File implements IFile {
     }
 
     @Override
-    public File getFileObject() {
+    public File toFile() {
         return new File(getAbsolutePath());
     }
 

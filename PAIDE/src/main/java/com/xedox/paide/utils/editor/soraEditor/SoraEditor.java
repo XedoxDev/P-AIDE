@@ -4,19 +4,12 @@ import android.content.Context;
 
 import android.graphics.Typeface;
 import android.view.View;
-import com.xedox.paide.utils.formatter.AutoFormat;
-import com.xedox.paide.utils.formatter.Formatter;
+import com.xedox.paide.PAIDE;
 import com.xedox.paide.utils.editor.Editor;
 
 import io.github.rosemoe.sora.widget.CodeEditor;
 
 public class SoraEditor extends CodeEditor implements Editor {
-
-    public static Formatter formatter;
-
-    static {
-        formatter = new AutoFormat();
-    }
 
     public SoraEditor(Context c) {
         super(c);
@@ -37,7 +30,7 @@ public class SoraEditor extends CodeEditor implements Editor {
 
     @Override
     public void formate() {
-        setCode(formatter.format(getCode()));
+        setCode(PAIDE.formatter.format(getCode()));
     }
 
     @Override
